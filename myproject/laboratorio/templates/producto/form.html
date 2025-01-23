@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}{% if producto %}Editar Producto{% else %}Crear Producto{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if producto %}Editar Producto{% else %}Crear Producto{% endif %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" value="{{ producto.nombre|default:'' }}" required><br>
+
+    <label for="laboratorio">Laboratorio:</label>
+    <select name="laboratorio">
+        {% for lab in laboratorios %}
+        <option value="{{ lab.pk }}" {% if producto and producto.laboratorio == lab %}selected{% endif %}>{{ lab.nombre }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="f_fabricacion">Fecha de Fabricación:</label>
+    <input type="date" name="f_fabricacion" value="{{ producto.f_fabricacion|default:'' }}"><br>
+
+    <label for="p_costo">Precio de Costo:</label>
+    <input type="number" step="0.01" name="p_costo" value="{{ producto.p_costo|default:'' }}"><br>
+
+    <label for="p_venta">Precio de Venta:</label>
+    <input type="number" step="0.01" name="p_venta" value="{{ producto.p_venta|default:'' }}"><br>
+
+    <button type="submit">Guardar</button>
+</form>
+<a href="{% url 'producto-list' %}">Cancelar</a>
+{% endblock %}

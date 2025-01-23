@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}{% if laboratorio %}Editar Laboratorio{% else %}Crear Laboratorio{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if laboratorio %}Editar Laboratorio{% else %}Crear Laboratorio{% endif %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" value="{{ laboratorio.nombre|default:'' }}" required><br>
+    <label for="ciudad">Ciudad:</label>
+    <input type="text" name="ciudad" value="{{ laboratorio.ciudad|default:'' }}"><br>
+    <label for="pais">País:</label>
+    <input type="text" name="pais" value="{{ laboratorio.pais|default:'' }}"><br>
+    <button type="submit">Guardar</button>
+</form>
+<a href="{% url 'laboratorio-list' %}">Cancelar</a>
+{% endblock %}

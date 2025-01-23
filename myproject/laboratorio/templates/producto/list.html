@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Listado de productos{% endblock %}
+
+{% block content %}
+<h1>Lista de Productos</h1>
+<a href="{% url 'producto-create' %}">Crear nuevo producto</a>
+<ul>
+    {% for producto in productos %}
+    <li>
+        <a href="{% url 'producto-detail' producto.pk %}">{{ producto.nombre }}</a> - Laboratorio: {{ producto.laboratorio.nombre }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

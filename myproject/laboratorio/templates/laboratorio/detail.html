@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}laboratorio: {{ laboratorio.nombre }}{% endblock %}
+
+{% block content %}
+<h1>{{ laboratorio.nombre }}</h1>
+<p>Ciudad: {{ laboratorio.ciudad }}</p>
+<p>País: {{ laboratorio.pais }}</p>
+<a href="{% url 'laboratorio-update' laboratorio.pk %}">Editar</a>
+<form action="{% url 'laboratorio-delete' laboratorio.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+</form>
+<a href="{% url 'laboratorio-list' %}">Volver a la lista</a>
+{% endblock %}

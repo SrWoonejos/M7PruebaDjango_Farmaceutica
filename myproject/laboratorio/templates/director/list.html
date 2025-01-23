@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Listado de directores{% endblock %}
+
+{% block content %}
+<h1>Lista de Directores Generales</h1>
+<a href="{% url 'director-create' %}">Crear nuevo director general</a>
+<ul>
+    {% for director in directores %}
+    <li>
+        <a href="{% url 'director-detail' director.pk %}">{{ director.nombre }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

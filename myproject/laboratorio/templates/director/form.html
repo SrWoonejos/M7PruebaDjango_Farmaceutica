@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}{% if director %}Editar Director General{% else %}Crear Director General{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if director %}Editar Director General{% else %}Crear Director General{% endif %}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" value="{{ director.nombre|default:'' }}" required><br>
+    <label for="especialidad">Especialidad:</label>
+    <input type="text" name="especialidad" value="{{ director.especialidad|default:'' }}"><br>
+    <label for="laboratorio">Laboratorio:</label>
+    <select name="laboratorio">
+        {% for lab in laboratorios %}
+        <option value="{{ lab.pk }}" {% if director and director.laboratorio == lab %}selected{% endif %}>{{ lab.nombre }}</option>
+        {% endfor %}
+    </select><br>
+    <button type="submit">Guardar</button>
+</form>
+<a href="{% url 'director-list' %}">Cancelar</a>
+{% endblock %}

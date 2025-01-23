@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Listado de directores{% endblock %}
+
+{% block content %}
+<h1>Lista de Laboratorios</h1>
+<a href="{% url 'laboratorio-create' %}">Crear nuevo laboratorio</a>
+<ul>
+    {% for laboratorio in laboratorios %}
+    <li>
+        <a href="{% url 'laboratorio-detail' laboratorio.pk %}">{{ laboratorio.nombre }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
